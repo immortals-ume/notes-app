@@ -1,0 +1,35 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: notes-app
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/notes_db?ssl=false
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  liquibase:
+    change-log: db/changelog-master.xml
+    enabled: false
+  data:
+    redis:
+      database: 0
+      host: localhost
+      port: 6379
+      password: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+      connect-timeout: 60000
+      timeout: 60000
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+
+
