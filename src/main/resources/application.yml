@@ -4,15 +4,28 @@ server:
 spring:
   application:
     name: notes-app
+  # data source is a factory for connecting to any physical data source.
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/notes_db?ssl=false
     username: postgres
     password: postgres
+  #This(create and update) should not be used in production
   jpa:
     hibernate:
       ddl-auto: none
-    show-sql: true
+    show-sql: false
+    properties:
+      org:
+        hibernate:
+          envers:
+            audit_table_suffix: _AUD_LOG
+            revision_field_name: REVISION_ID
+            revision_type_field_name: REVISION_TYPE
+      hibernate:
+        integration:
+          envers:
+            enabled: true
   liquibase:
     change-log: db/changelog-master.xml
     enabled: false
@@ -24,12 +37,33 @@ spring:
       password: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
       connect-timeout: 60000
       timeout: 60000
+
 eureka:
   client:
     service-url:
       default-zone: http://localhost:8761/eureka/
+    enabled: true
   instance:
     prefer-ip-address: true
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env,beans"
+  server:
+    port: 9090
+
+logging:
+  level:
+    org.springframework: INFO
 
 
+springdoc:
+  swagger-ui:
+    path: /swagger-ui-custom.html
+  api-docs:
+    path: /api-docs
+  show-actuator: true
+  use-management-port: false

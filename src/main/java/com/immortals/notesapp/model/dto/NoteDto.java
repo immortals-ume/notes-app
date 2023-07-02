@@ -9,20 +9,20 @@ import lombok.Setter;
 @Setter
 public class NoteDto {
 
-    @NotNull
+
+    @NotNull(message = "Title Must Not Be Null")
     @JsonProperty("title")
     private String title;
-
 
     @JsonProperty("content")
     private String content;
 
-    @NotNull
+
+    @NotNull(message = "User Id Must Not Be Null")
     @JsonProperty("userId")
     private Long userId;
 
     @JsonProperty("pinedInd")
     private Boolean pinedInd;
-
 
 }

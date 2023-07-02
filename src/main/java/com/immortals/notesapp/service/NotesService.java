@@ -8,11 +8,11 @@ import java.util.List;
 public interface NotesService {
     Note addNotes(NoteDto noteDto);
 
-    List<Note> getNotes();
+    List<Note> getNotes(Long userId);
 
-    Note getNote(Long id);
+    Note getNote(String uniqueNoteId);
 
-    Note updateNote(Long noteId, Note note);
+    String updateNote(String uniqueNoteId, NoteDto noteDto);
 
-    String deleteNotes(List<Long> noteIds);
+    String deleteNote(String uniqueNotesId);
 }
